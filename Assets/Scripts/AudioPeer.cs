@@ -5,10 +5,13 @@ using UnityEngine;
 public class AudioPeer : MonoBehaviour
 {
     private AudioSource _audioSource;
-    public static float[] _samples = new float[512];
     private float[] _frequency = new float[8];
+    private float _clipLoudness;
 
     public float[] Frequency => _frequency;
+    public float ClipLoudness => _clipLoudness;
+    public static float[] _samples = new float[512];
+
 
     private void Start()
     {
@@ -19,6 +22,20 @@ public class AudioPeer : MonoBehaviour
     {
         GetAudioSpectrum();
         GetFrequency();
+        GetLoudness();
+    }
+
+    private void GetLoudness()
+    {
+        _audioSource.clip.GetData(_samples, _audioSource.timeSamples);
+        _clipLoudness = 0f;
+
+        foreach (var sample in _samples)
+        {
+            _clipLoudness += Mathf.Abs(sample);
+        }
+
+        _clipLoudness /= 512;
     }
 
     private void GetFrequency()
