@@ -14,6 +14,6 @@ public class LightAudioSync : MonoBehaviour
     private void UpdateLightIntensity()
     {
         float audioAmp = _audioPeer.ClipLoudness;
-        _light.intensity = audioAmp * 400;
+        _light.intensity = audioAmp * 600;
     }
 }
