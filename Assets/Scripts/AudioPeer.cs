@@ -12,7 +12,6 @@ public class AudioPeer : MonoBehaviour
     public float ClipLoudness => _clipLoudness;
     public static float[] _samples = new float[512];
 
-
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -36,6 +35,11 @@ public class AudioPeer : MonoBehaviour
         }
 
         _clipLoudness /= 512;
+
+        if(!_audioSource.isPlaying)
+        {
+            _clipLoudness = 0;
+        }
     }
 
     private void GetFrequency()
