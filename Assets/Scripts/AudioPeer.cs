@@ -35,6 +35,7 @@ public class AudioPeer : MonoBehaviour
         }
 
         _clipLoudness /= 512;
+        _clipLoudness *= _audioSource.volume;
 
         if(!_audioSource.isPlaying)
         {
